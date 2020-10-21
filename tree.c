@@ -50,6 +50,7 @@ void attachNode( struct Performance *performance, struct Node **node_ptr, void *
 int comparNode( struct Performance *performance, struct Node **node_ptr, 
                 int (*compar)(const void *, const void *), void *target )
 {
+  performance->reads++;
   return compar( target, (*node_ptr)->data );
 }
 
@@ -147,4 +148,3 @@ int searchItem( struct Performance *performance, struct Node **node_ptr,
     return 0;
   }
 }
-
