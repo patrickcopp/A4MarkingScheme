@@ -13,16 +13,24 @@ void _printPerf(struct Performance *perf)
 	printf("%d:%d:%d:%d\r\n",perf->reads,perf->writes,perf->mallocs,perf->frees);
 }
 
-//1:1:1:0
+// 2:2:2:0
 int main()
 {
 	struct Performance *perf= newPerformance();
-	struct Node **node = malloc(sizeof(struct Node*));
 	char data[10];
+
+	struct Node **node = malloc(sizeof(struct Node*));
+	strcpy(data,"MIDDLE");
+	attachNode(perf,node,data,7);
+
 	strcpy(data,"CORRECT");
-	attachNode(perf,node,data,8);
-	if( comparNode(perf,node,compareStrings,data)==0 && strcmp(((char *)((*node)->data)),"CORRECT")==0)
+	addItem(perf,node,compareStrings,data,8);
+	
+	if( strcmp((char*)(((struct Node *)((*node)->lt))->data),"CORRECT")==0 )
 		_printPerf(perf);
+	
+	free(((struct Node *)((*node)->lt))->data);
+	free((*node)->lt);
 	free((*node)->data);
 	free(*node);
 	free(node);

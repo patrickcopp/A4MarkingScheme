@@ -3,29 +3,37 @@
 #include <string.h>
 #include "tree.h"
 
-int compareStrings(const void *s1, const void *s2)
+int compareInts(const void *s1, const void *s2)
 {
-	return strcmp((const char *)s1,(const char *)s2);
+	return (const int *)s1-(const int *)s2;
 }
 
+void _printPerf(struct Performance *perf)
+{
+	printf("%d:%d:%d:%d\r\n",perf->reads,perf->writes,perf->mallocs,perf->frees);
+}
+
+//1:2:2:0
 int main()
 {
 	struct Performance *perf= newPerformance();
 	struct Node **node = malloc(sizeof(struct Node*));
-	char data[10];
-	strcpy(data,"CORRECT\0");
-	attachNode(perf,node,data,8);
+
+	int *data = malloc(sizeof(int));
+	*data=5;
+	attachNode(perf,node,data,sizeof(int));
 
 	struct Node **node2 = malloc(sizeof(struct Node*));
-	strcpy(data,"INCORRECT\0");
-	attachNode(perf,node2,data,10);
+	*data = 6;
+	attachNode(perf,node2,data,sizeof(int));
 
 	(*node)->lt = *node2;
 	struct Node **node3 = next(perf,node,-1);
 
-	if( strcmp((char *)((*node3)->data),data)==0 && perf->mallocs == 2 && perf->writes == 2 && perf->reads == 1 && perf->frees == 0 && (*node)->gte == NULL)
-		printf("%s\r\n",(char *)((*node)->data));
+	if( *((int *)((*node3)->data)) == *data )
+		_printPerf(perf);
 
+	free(data);
 	free((*node2)->data);
 	free((*node)->data);
 	free(*node);

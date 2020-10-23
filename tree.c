@@ -62,7 +62,6 @@ struct Node **next( struct Performance *performance, struct Node **node_ptr,
     fprintf( stderr, "err\n" );
     exit(-1);
   }
-
   performance->reads++;
 
   if (direction<0)

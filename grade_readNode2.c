@@ -3,11 +3,6 @@
 #include <string.h>
 #include "tree.h"
 
-int compareStrings(const void *s1, const void *s2)
-{
-	return strcmp((const char *)s1,(const char *)s2);
-}
-
 void _printPerf(struct Performance *perf)
 {
 	printf("%d:%d:%d:%d\r\n",perf->reads,perf->writes,perf->mallocs,perf->frees);
@@ -18,11 +13,17 @@ int main()
 {
 	struct Performance *perf= newPerformance();
 	struct Node **node = malloc(sizeof(struct Node*));
-	char data[10];
-	strcpy(data,"CORRECT");
-	attachNode(perf,node,data,8);
-	if( comparNode(perf,node,compareStrings,data)==0 && strcmp(((char *)((*node)->data)),"CORRECT")==0)
+	int *data = malloc(sizeof(int));
+	int *dataCopy = malloc(sizeof(int));
+	*data = 5;
+	attachNode(perf,node,data,(sizeof(int)));
+	readNode(perf,node,dataCopy,(sizeof(int)));
+
+	if( (*data)==(*dataCopy) )
 		_printPerf(perf);
+	
+	free(data);
+	free(dataCopy);
 	free((*node)->data);
 	free(*node);
 	free(node);
