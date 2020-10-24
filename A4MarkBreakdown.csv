@@ -1,0 +1,22 @@
+﻿Mark Number,File,Additional Command Line Arg (./a.out [number],Expected Output
+1,grade_newPerf.c,,0:0:0:0
+2,grade_attachNode.c,1,0:1:1:0
+3,grade_attachNode.c,2,0:1:1:0
+4,grade_attachNode.c,3,0:1:1:0
+5,grade_comparNode.c,1,1:1:1:0
+6,grade_comparNode.c,2,1:1:1:0
+7,grade_next.c,1,1:2:2:0
+8,grade_next.c,2,1:2:2:0
+9,grade_readNode.c,1,1:1:1:0
+10,grade_readNode.c,2,1:1:1:0
+11,grade_detachNode.c,1,0:1:1:1
+12,grade_detachNode.c,2,0:1:1:1
+13,grade_addItem.c,1,2:2:2:0
+14,grade_addItem.c,2,6:3:3:0
+15,grade_freeTree.c,1,4:2:2:2
+16,grade_freeTree.c,2,10:5:5:5
+17,grade_searchItem.c,1,2:5:5:0
+18,grade_searchItem.c,2,4:5:5:0
+19,grade_searchItem.c,3,6:5:5:0
+20,grade_searchItem.c,4,4:5:5:0
+21,grade_searchItem.c,5,6:5:5:0
